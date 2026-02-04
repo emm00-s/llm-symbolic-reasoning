@@ -71,17 +71,17 @@ def z3_p4():
 
 def z3_p5():
     # P5: META-LOGIC — Satisfiability Check (Grandfather Paradox)
-    #
-    # Domanda diversa da tutti gli altri puzzle: non testa il valore di una
-    # variabile target, ma la consistenza globale del knowledge base.
-    #
-    # Output space ridotto: {"True" (SAT), "Paradox" (UNSAT)}.
-    # "False" e "Unknown" non sono possibili in questo contesto.
-    #
-    # Nota: la catena T->M->D->Not(B)->Not(T) è un'implicazione circolare,
-    # NON una contraddizione. Es. modello valido: T=False, B=True.
-    # Il LLM potrebbe rispondere "Paradox" per bias narrativo sul Grandfather
-    # Paradox — questa è la trappola semantica del puzzle.
+#
+# Different question from all other puzzles: does not test the truth value
+# of a target variable, but the global consistency of the knowledge base.
+#
+# Reduced output space: {"True" (SAT), "Paradox" (UNSAT)}.
+# "False" and "Unknown" are not possible in this context.
+#
+# Note: the chain T->M->D->Not(B)->Not(T) is a circular implication,
+# NOT a contradiction. E.g., valid model: T=False, B=True.
+# The LLM might answer "Paradox" due to narrative bias about the Grandfather
+# Paradox — this is the semantic trap of the puzzle.
     s = Solver()
     T, M, D, B = Bools('T M D B')  # Travel, Meet, Distract, Born
     s.add(Implies(T, M))
@@ -116,8 +116,8 @@ def z3_p8():
 
 def z3_p9():
     # P9: Contradiction (Paradox).
-    # Premesse L e Not(L) sono inconsistenti. Il consistency check in
-    # check_full_truth restituisce "Paradox" prima ancora di testare il target.
+    # Premises L and Not(L) are inconsistent. The consistency check in
+    # check_full_truth returns "Paradox" before even testing the target.
     s = Solver()
     L = Bool('L')
     s.add(L)

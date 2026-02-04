@@ -1,6 +1,6 @@
 """
 MAIN EXPERIMENTAL ENGINE
--------------------------
+
 Runs the logical calibration experiment:
   - Loads puzzles from dataset.py
   - Computes ground truth via Z3 (solvers.py)
@@ -24,9 +24,9 @@ import numpy as np
 
 from dataset import ALL_PUZZLES
 
-# ---------------------------------------------------------------------------
+
 # 1. CONFIGURATION
-# ---------------------------------------------------------------------------
+
 load_dotenv()
 
 logging.basicConfig(
@@ -49,9 +49,9 @@ DEFAULT_VALID_OUTPUTS = ["True", "False", "Unknown", "Paradox"]
 OUTPUT_CSV   = "results.csv"
 OUTPUT_CHART = "results_chart.png"
 
-# ---------------------------------------------------------------------------
+
 # 2. PROMPT TEMPLATES  (Independent Variables)
-# ---------------------------------------------------------------------------
+
 STRATEGIES = {
     "Natural": (
         "Read the following story.\n"
@@ -72,9 +72,8 @@ STRATEGIES = {
     ),
 }
 
-# ---------------------------------------------------------------------------
 # 3. PREFIX MAPPING
-# ---------------------------------------------------------------------------
+
 PREFIX_MAP = {
     "tr":  "True",
     "fa":  "False",
@@ -96,9 +95,9 @@ def map_token(raw: str) -> str | None:
             return label
     return None
 
-# ---------------------------------------------------------------------------
+
 # 4. API CALL
-# ---------------------------------------------------------------------------
+
 def call_llm(prompt: str) -> dict | None:
     """
     Calls GPT-4o-mini and returns a dictionary with:
@@ -142,9 +141,9 @@ def call_llm(prompt: str) -> dict | None:
         logger.warning(f"API error: {e}")
         return None
 
-# ---------------------------------------------------------------------------
+
 # 5. MAIN LOOP
-# ---------------------------------------------------------------------------
+
 def run_experiment() -> list[dict]:
     """
     Runs the full experiment.
@@ -170,14 +169,14 @@ def run_experiment() -> list[dict]:
         z3_func     = puzzle["z3_func"]
         valid_out   = puzzle.get("valid_outputs", DEFAULT_VALID_OUTPUTS)
 
-        # --- Ground truth (Z3) ---
+        # Ground truth (Z3)
         ground_truth = z3_func()
         logger.info(f"[{puzzle_id}] Ground Truth (Z3): {ground_truth}")
 
         for strategy_name, template in STRATEGIES.items():
             prompt = template.format(story=story_text)
 
-            # --- API call ---
+            # API call
             api_result = call_llm(prompt)
 
             if api_result is None:
@@ -198,7 +197,7 @@ def run_experiment() -> list[dict]:
                 })
                 continue
 
-            # --- Mapping & Validation ---
+            # Mapping & Validation 
             raw_token     = api_result["raw_token"]
             mapped_token  = map_token(raw_token)
 
@@ -206,7 +205,7 @@ def run_experiment() -> list[dict]:
             if mapped_token not in valid_out:
                 mapped_token = None  # out of valid space → Invalid
 
-            # --- Comparison with ground truth ---
+            # Comparison with ground truth 
             if mapped_token is None:
                 correct = None   # Invalid: excluded from metrics
                 label   = "Invalid"
@@ -234,7 +233,7 @@ def run_experiment() -> list[dict]:
 
         logger.info("")  # blank line between puzzles
 
-    # --- Summary ---
+    # Summary 
     logger.info("=" * 60)
     logger.info("EXPERIMENT SUMMARY")
     logger.info("=" * 60)
@@ -254,9 +253,9 @@ def run_experiment() -> list[dict]:
 
     return results
 
-# ---------------------------------------------------------------------------
+
 # 6. CSV EXPORT
-# ---------------------------------------------------------------------------
+
 CSV_FIELDS = [
     "id", "category", "strategy", "raw_token", "mapped_token",
     "ground_truth", "correct", "confidence", "top_logprobs", "latency_ms",
@@ -271,9 +270,9 @@ def save_csv(results: list[dict]):
         writer.writerows(results)
     logger.info(f"Results saved to '{OUTPUT_CSV}'")
 
-# ---------------------------------------------------------------------------
+
 # 7. CHART GENERATION
-# ---------------------------------------------------------------------------
+
 def generate_charts(results: list[dict]):
     """
     Generates a PNG with 2 side-by-side subplots:
@@ -282,7 +281,7 @@ def generate_charts(results: list[dict]):
     """
     strategies = list(STRATEGIES.keys())
 
-    # --- Metrics calculation by strategy ---
+    # Metrics calculation by strategy 
     accuracy_map  = {}
     confidence_map = {}
 
@@ -303,17 +302,17 @@ def generate_charts(results: list[dict]):
         else:
             confidence_map[strat] = 0.0
 
-    # --- Colors ---
+    # Colors 
     colors = ["#4A90D9", "#E8734A"]  # Blue, Orange
 
-    # --- Layout ---
+    # Layout
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     fig.suptitle("LLM Logical Calibration — GPT-4o-mini", fontsize=14, fontweight="bold", y=1.02)
 
     x     = np.arange(len(strategies))
     width = 0.5
 
-    # --- Left subplot: Accuracy ---
+    # Left subplot: Accuracy 
     ax1 = axes[0]
     bars1 = ax1.bar(x, [accuracy_map[s] for s in strategies], width, color=colors)
     ax1.set_title("Accuracy (%)", fontsize=12, fontweight="bold")
@@ -330,7 +329,7 @@ def generate_charts(results: list[dict]):
         ax1.text(bar.get_x() + bar.get_width() / 2, height + 1.5,
                  f"{height:.1f}%", ha="center", va="bottom", fontsize=11, fontweight="bold")
 
-    # --- Right subplot: Confidence ---
+    # Right subplot: Confidence
     ax2 = axes[1]
     bars2 = ax2.bar(x, [confidence_map[s] for s in strategies], width, color=colors)
     ax2.set_title("Average Confidence (%)", fontsize=12, fontweight="bold")
@@ -352,9 +351,9 @@ def generate_charts(results: list[dict]):
     plt.close()
     logger.info(f"Chart saved to '{OUTPUT_CHART}'")
 
-# ---------------------------------------------------------------------------
+
 # 8. ENTRY POINT
-# ---------------------------------------------------------------------------
+
 if __name__ == "__main__":
     logger.info(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] START")
     results = run_experiment()
