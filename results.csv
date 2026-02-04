@@ -1,0 +1,19 @@
+id,category,strategy,raw_token,mapped_token,ground_truth,correct,confidence,top_logprobs,latency_ms
+P01_Chain_Factory,Transitive,Natural,False,False,False,1,99.98,"{""False"": 99.98, ""True"": 0.02, "" False"": 0.0, ""Unknown"": 0.0, ""FALSE"": 0.0}",1489.89
+P01_Chain_Factory,Transitive,Formal Persona,False,False,False,1,99.81,"{""False"": 99.81, ""True"": 0.19, ""Unknown"": 0.0, "" False"": 0.0, ""Par"": 0.0}",492.8
+P02_Contradiction_Potion,Transitive,Natural,False,False,False,1,99.97,"{""False"": 99.97, ""True"": 0.03, ""Unknown"": 0.01, ""Par"": 0.0, "" False"": 0.0}",465.68
+P02_Contradiction_Potion,Transitive,Formal Persona,False,False,False,1,99.99,"{""False"": 99.99, ""Par"": 0.01, ""True"": 0.0, "" False"": 0.0, ""Unknown"": 0.0}",452.1
+P03_Exclusion_Theft,Sets,Natural,True,True,True,1,100.0,"{""True"": 100.0, ""False"": 0.0, "" True"": 0.0, ""TRUE"": 0.0, ""Truth"": 0.0}",417.18
+P03_Exclusion_Theft,Sets,Formal Persona,True,True,True,1,99.99,"{""True"": 99.99, ""False"": 0.01, "" True"": 0.0, ""Unknown"": 0.0, ""Truth"": 0.0}",595.67
+P04_Counting_PowerPlant,Sets,Natural,False,False,True,0,100.0,"{""False"": 100.0, ""Unknown"": 0.0, ""True"": 0.0, "" False"": 0.0, ""FALSE"": 0.0}",1039.07
+P04_Counting_PowerPlant,Sets,Formal Persona,False,False,True,0,99.94,"{""False"": 99.94, ""Unknown"": 0.06, ""True"": 0.01, "" False"": 0.0, ""Par"": 0.0}",346.1
+P05_Satisfiability_TimeTravel,Meta-Logic,Natural,Par,Paradox,True,0,100.0,"{""Par"": 100.0, ""False"": 0.0, ""Unknown"": 0.0, ""True"": 0.0, "" Par"": 0.0}",553.34
+P05_Satisfiability_TimeTravel,Meta-Logic,Formal Persona,Par,Paradox,True,0,99.7,"{""Par"": 99.7, ""Unknown"": 0.25, ""False"": 0.06, ""True"": 0.0, "" Par"": 0.0}",489.02
+P06_Exception_Penguin,Non-Monotonic,Natural,False,False,Unknown,0,100.0,"{""False"": 100.0, "" False"": 0.0, ""True"": 0.0, ""FALSE"": 0.0, "".False"": 0.0}",592.45
+P06_Exception_Penguin,Non-Monotonic,Formal Persona,False,False,Unknown,0,100.0,"{""False"": 100.0, ""Unknown"": 0.0, "" False"": 0.0, ""True"": 0.0, ""Par"": 0.0}",322.51
+P07_Independence_Rooms,Fallacy,Natural,Unknown,Unknown,Unknown,1,100.0,"{""Unknown"": 100.0, ""False"": 0.0, "" Unknown"": 0.0, ""unknown"": 0.0, "" unknown"": 0.0}",362.46
+P07_Independence_Rooms,Fallacy,Formal Persona,Unknown,Unknown,Unknown,1,96.27,"{""Unknown"": 96.27, ""False"": 3.73, ""True"": 0.0, "" Unknown"": 0.0, ""Undefined"": 0.0}",440.57
+P08_Tautology_StockMarket,Propositional,Natural,True,True,True,1,100.0,"{""True"": 100.0, ""Unknown"": 0.0, ""Truth"": 0.0, "" True"": 0.0, ""TRUE"": 0.0}",413.09
+P08_Tautology_StockMarket,Propositional,Formal Persona,True,True,True,1,98.19,"{""True"": 98.19, ""Par"": 1.8, ""Unknown"": 0.01, ""Truth"": 0.0, ""False"": 0.0}",438.98
+P09_Paradox_ContradictoryObservation,Paradox,Natural,Par,Paradox,Paradox,1,99.98,"{""Par"": 99.98, ""Unknown"": 0.01, ""False"": 0.01, ""Contr"": 0.0, ""par"": 0.0}",405.15
+P09_Paradox_ContradictoryObservation,Paradox,Formal Persona,Par,Paradox,Paradox,1,100.0,"{""Par"": 100.0, "" Par"": 0.0, ""Parity"": 0.0, "" paradox"": 0.0, ""False"": 0.0}",524.34
