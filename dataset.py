@@ -1,5 +1,5 @@
 """
-DATASET CONFIGURATION MODULE (NATURAL LANGUAGE EDITION)
+DATASET CONFIGURATION MODULE 
 -------------------------------------------------------
 This module defines controlled natural-language narratives as experimental stimuli.
 Each narrative is paired with a Z3-based solver function that provides the ground-truth label.
