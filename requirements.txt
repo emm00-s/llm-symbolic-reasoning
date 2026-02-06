@@ -1,0 +1,5 @@
+openai
+z3-solver
+python-dotenv
+matplotlib
+numpy
