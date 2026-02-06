@@ -8,7 +8,7 @@ This project evaluates whether Large Language Models possess genuine symbolic re
 
 **Key Findings:**
 - Overall accuracy: 66.7%
-- Systematic failures on meta-logic (0%), non-monotonic logic (0%), cardinality constraints (0%)
+- Systematic failures on meta-logic (0%), non-monotonic logic (0%), sets (0%)
 - Severe miscalibration: 99-100% confidence on incorrect answers
 - Role-play prompting ineffective: 100% agreement between strategies
 
