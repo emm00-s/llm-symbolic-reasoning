@@ -28,7 +28,7 @@ Dependencies:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/llm-symbolic-reasoning.git
+git clone https://github.com/emm00-s/llm-symbolic-reasoning.git
 cd llm-symbolic-reasoning
 ```
 
