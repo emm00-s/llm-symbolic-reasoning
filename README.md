@@ -71,7 +71,7 @@ This will:
 |----------|--------|--------------|----------------|
 | Transitive | P01, P02 | False | 100% |
 | Sets | P03 | True | 100% |
-| **Sets** | **P04** | **True** | **0% (Failed)** |
+| **Sets/Cardinality** | **P04** | **True** | **0% (Failed)** |
 | **Meta-Logic** | **P05** | **True** | **0% (Failed)** |
 | **Non-Monotonic** | **P06** | **Unknown** | **0% (Failed)** |
 | Fallacy | P07 | Unknown | 100% |
